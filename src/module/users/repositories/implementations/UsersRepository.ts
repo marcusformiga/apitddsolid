@@ -17,7 +17,8 @@ export class UsersRepository implements ICreateUserRepository {
     await this.userRepository.save(user);
     return user;
   }
-  findByEmail(email: string): Promise<User | undefined> {
-    throw new Error("Method not implemented.");
+  async findByEmail(email: string): Promise<User | undefined> {
+    const user = await this.userRepository.findOne(email);
+    return user;
   }
 }

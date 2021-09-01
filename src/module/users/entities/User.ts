@@ -3,9 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import {
   Column,
   CreateDateColumn,
+  Entity,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+@Entity("users")
 export class User implements CreateUserDto {
   @PrimaryColumn()
   id?: string;
