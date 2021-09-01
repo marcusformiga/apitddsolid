@@ -16,4 +16,8 @@ export class UsersRepositoryFake implements ICreateUserRepository {
     const user = this.users.find((user) => user.email === email);
     return user;
   }
+  public async findAll(): Promise<User[] | undefined> {
+    const users = this.users;
+    return users;
+  }
 }

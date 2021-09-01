@@ -8,7 +8,7 @@ export class UsersRepository implements ICreateUserRepository {
   constructor() {
     this.userRepository = getRepository(User);
   }
-  async create({ name, email, password }: CreateUserDto): Promise<User> {
+  public async create({ name, email, password }: CreateUserDto): Promise<User> {
     const user = new User();
     user.name = name;
     user.email = email;
@@ -17,8 +17,12 @@ export class UsersRepository implements ICreateUserRepository {
     await this.userRepository.save(user);
     return user;
   }
-  async findByEmail(email: string): Promise<User | undefined> {
+  public async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.userRepository.findOne(email);
     return user;
+  }
+  public async findAll(): Promise<User[] | undefined> {
+    const users = await this.userRepository.find();
+    return users;
   }
 }
