@@ -5,6 +5,7 @@ import "../../database/index";
 import "../../container/index";
 import { AppError } from "../../errors/AppError";
 import { usersRouter } from "../routes/users.routes";
+import { productsRouter } from "../routes/products.routes";
 const server = express();
 const port = 3001;
 
@@ -14,6 +15,7 @@ server.get("/test", (request: Request, response: Response) => {
   return response.status(200).send("Rota de teste");
 });
 server.use("/users", usersRouter);
+server.use("/products", productsRouter);
 server.use(
   (error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
@@ -23,6 +25,7 @@ server.use(
       });
     }
     console.log(error);
+
     return response.status(500).json({
       status: "error",
       message: "Internal server error",
