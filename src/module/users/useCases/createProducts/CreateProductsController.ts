@@ -6,12 +6,12 @@ export class CreateProductController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const { name, description, price, quantity } = request.body;
     const createProductsUseCases = container.resolve(CreateProductsUseCases);
-    await createProductsUseCases.execute({
+    const product = await createProductsUseCases.execute({
       name,
       description,
       price,
       quantity,
     });
-    return response.status(201).json(createProductsUseCases);
+    return response.status(201).json(product);
   }
 }
