@@ -20,6 +20,10 @@ export class CreateUsers1630413315029 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "is_admin",
+            type: "boolean",
+          },
+          {
             name: "password",
             type: "varchar",
           },

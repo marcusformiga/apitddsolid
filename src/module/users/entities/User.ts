@@ -16,6 +16,8 @@ export class User implements CreateUserDto {
   @Column()
   password: string;
   @Column()
+  is_admin: boolean;
+  @Column()
   email: string;
   @CreateDateColumn()
   created_at?: Date;
@@ -24,6 +26,7 @@ export class User implements CreateUserDto {
   constructor() {
     if (!this.id) {
       this.id = uuidv4();
+      this.is_admin = true;
     }
   }
 }
