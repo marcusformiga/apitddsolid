@@ -20,4 +20,12 @@ export class UsersRepositoryFake implements ICreateUserRepository {
     const users = this.users;
     return users;
   }
+  public async findById(id: string): Promise<User | undefined> {
+    const user = this.users.find((user) => user.id === id);
+    return user;
+  }
+  public async remove(id: string): Promise<void> {
+    const userExists = this.users.findIndex((user) => user.id === id);
+    this.users.splice(userExists, 1);
+  }
 }
