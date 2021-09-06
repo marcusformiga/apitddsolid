@@ -8,6 +8,7 @@ export class UsersRepository implements ICreateUserRepository {
   constructor() {
     this.userRepository = getRepository(User);
   }
+
   public async create({ name, email, password }: CreateUserDto): Promise<User> {
     const user = new User();
     user.name = name;
@@ -24,5 +25,12 @@ export class UsersRepository implements ICreateUserRepository {
   public async findAll(): Promise<User[] | undefined> {
     const users = await this.userRepository.find();
     return users;
+  }
+  public async findById(id: string): Promise<User | undefined> {
+    const user = await this.userRepository.findOne(id);
+    return user;
+  }
+  public async remove(id: string): Promise<void> {
+    await this.userRepository.delete(id);
   }
 }
