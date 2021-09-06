@@ -17,6 +17,7 @@ describe("CreateUsers", () => {
       name: "testname",
       email: "testemail@mail.com",
       password: "testpassword",
+      is_admin: false,
     };
     const newUser = await createUsersUseCases.execute(user);
     expect(newUser).toHaveProperty("id");
