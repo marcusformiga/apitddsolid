@@ -18,7 +18,10 @@ describe("DeleteUsersUseCases", () => {
         name: "validname",
         password: "validpassword",
       });
+      const repoSpy = jest.spyOn(usersRepositoryFake, "remove")
       await deleteUsersUseCases.execute("12validid");
+
+      expect(repoSpy).toHaveBeenCalledTimes(1)
     });
   });
   it("should not to be able to delete a no existent user", async () => {

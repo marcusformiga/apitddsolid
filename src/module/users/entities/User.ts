@@ -1,5 +1,5 @@
 import { CreateUserDto } from "./dto/CreateUserDto";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "crypto";
 import {
   Column,
   CreateDateColumn,
@@ -25,7 +25,7 @@ export class User implements CreateUserDto {
   updated_at?: Date;
   constructor() {
     if (!this.id) {
-      this.id = uuidv4();
+      this.id = randomUUID();
       this.is_admin = true;
     }
   }

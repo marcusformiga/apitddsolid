@@ -6,8 +6,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { CreateProductDto } from "./dto/CreateProductDto";
-import { v4 as uuidv4 } from "uuid";
-
+import { randomUUID } from "crypto";
 @Entity("products")
 export class Product implements CreateProductDto {
   @PrimaryColumn()
@@ -26,7 +25,7 @@ export class Product implements CreateProductDto {
   updated_at?: Date;
   constructor() {
     if (!this.id) {
-      this.id = uuidv4();
+      this.id = randomUUID();
     }
   }
 }

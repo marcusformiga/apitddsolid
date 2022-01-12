@@ -7,7 +7,7 @@ let createUsersUseCases: CreateUserUseCases;
 let createUsersRepositoryFake: UsersRepositoryFake;
 // triplo a pattern (arrange, action, assert)
 describe("CreateUsers", () => {
-  beforeEach(() => {
+  beforeAll(() => {
     createUsersRepositoryFake = new UsersRepositoryFake();
     createUsersUseCases = new CreateUserUseCases(createUsersRepositoryFake);
   });
@@ -19,9 +19,12 @@ describe("CreateUsers", () => {
       password: "testpassword",
       is_admin: false,
     };
+    const repoSpy = jest.spyOn(createUsersRepositoryFake, "create")
     const newUser = await createUsersUseCases.execute(user);
+    expect(repoSpy).toHaveBeenCalledTimes(1)
     expect(newUser).toHaveProperty("id");
     expect(newUser).toBeDefined();
+    expect(newUser).toBeTruthy()
   });
   it("should not to be able to create 2 users with same email", async () => {
     expect(async () => {

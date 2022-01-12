@@ -19,7 +19,7 @@ export class UsersRepository implements ICreateUserRepository {
     return user;
   }
   public async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.userRepository.findOne(email);
+    const user = await this.userRepository.findOne({ email });
     return user;
   }
   public async findAll(): Promise<User[] | undefined> {
