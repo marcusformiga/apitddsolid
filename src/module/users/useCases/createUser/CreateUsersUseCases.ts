@@ -2,7 +2,7 @@ import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
 import { User } from "../../entities/User";
-import { ICreateUserRepository } from "../../repositories/interfaces/ICreateUserRepository";
+import { IUserRepository } from "../../repositories/interfaces/ICreateUserRepository";
 
 interface IRequest {
   name: string;
@@ -13,7 +13,7 @@ interface IRequest {
 export class CreateUserUseCases {
   constructor(
     @inject("UserRepository")
-    private createUserRepository: ICreateUserRepository
+    private createUserRepository: IUserRepository
   ) { }
   public async execute({ name, email, password }: IRequest): Promise<User> {
     const userExists = await this.createUserRepository.findByEmail(email);

@@ -1,9 +1,9 @@
 import { getRepository, Repository } from "typeorm";
 import { CreateUserDto } from "../../entities/dto/CreateUserDto";
 import { User } from "../../entities/User";
-import { ICreateUserRepository } from "../interfaces/ICreateUserRepository";
+import { IUserRepository } from "../interfaces/ICreateUserRepository";
 
-export class UsersRepository implements ICreateUserRepository {
+export class UsersRepository implements IUserRepository {
   userRepository: Repository<User>;
   constructor() {
     this.userRepository = getRepository(User);
@@ -23,11 +23,13 @@ export class UsersRepository implements ICreateUserRepository {
     return user;
   }
   public async findAll(): Promise<User[] | undefined> {
-    const users = await this.userRepository.find();
+    const users = await this.userRepository.find({ select: ["name", "email", "id"] });
     return users;
   }
   public async findById(id: string): Promise<User | undefined> {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne({ id }, {
+      select: ["email", "id", "name"]
+    });
     return user;
   }
   public async remove(id: string): Promise<void> {

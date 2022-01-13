@@ -1,9 +1,9 @@
 import { getRepository, Repository } from "typeorm";
 import { CreateProductDto } from "../../entities/dto/CreateProductDto";
 import { Product } from "../../entities/Product";
-import { ICreateProductRepository } from "../interfaces/ICreateProductRepository";
+import { IProductRepository } from "../interfaces/ICreateProductRepository";
 
-export class ProductsRepository implements ICreateProductRepository {
+export class ProductsRepository implements IProductRepository {
   productsRepository: Repository<Product>;
   constructor() {
     this.productsRepository = getRepository(Product);
@@ -22,5 +22,13 @@ export class ProductsRepository implements ICreateProductRepository {
     this.productsRepository.create(product);
     await this.productsRepository.save(product);
     return product;
+  }
+  public async find(): Promise<Product[]> {
+    const products = await this.productsRepository.find()
+    return products
+  }
+  public async findById(id: string): Promise<Product | undefined> {
+    const products = await this.productsRepository.findOne(id)
+    return products
   }
 }

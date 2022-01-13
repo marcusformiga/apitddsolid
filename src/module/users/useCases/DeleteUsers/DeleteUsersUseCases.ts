@@ -1,12 +1,12 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
-import { ICreateUserRepository } from "../../repositories/interfaces/ICreateUserRepository";
+import { IUserRepository } from "../../repositories/interfaces/ICreateUserRepository";
 
 @injectable()
 export class DeleteUsersUseCases {
   constructor(
-    @inject("UserRepository") private usersRepository: ICreateUserRepository
-  ) {}
+    @inject("UserRepository") private usersRepository: IUserRepository
+  ) { }
   public async execute(id: string): Promise<void> {
     const userExists = await this.usersRepository.findById(id);
     if (!userExists) {

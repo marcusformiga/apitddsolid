@@ -1,14 +1,14 @@
 import { inject, injectable } from "tsyringe";
 import { CreateProductDto } from "../../entities/dto/CreateProductDto";
 import { Product } from "../../entities/Product";
-import { ICreateProductRepository } from "../../repositories/interfaces/ICreateProductRepository";
+import { IProductRepository } from "../../repositories/interfaces/ICreateProductRepository";
 
 @injectable()
 export class CreateProductsUseCases {
   constructor(
     @inject("ProductRepository")
-    private productsRepository: ICreateProductRepository
-  ) {}
+    private productsRepository: IProductRepository
+  ) { }
   public async execute({
     name,
     description,

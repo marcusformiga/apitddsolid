@@ -1,7 +1,7 @@
 import { CreateUserDto } from "../../entities/dto/CreateUserDto";
 import { User } from "../../entities/User";
 
-export interface ICreateUserRepository {
+export interface IUserRepository {
   create(data: CreateUserDto): Promise<User>;
   findByEmail(email: string): Promise<User | undefined>;
   findAll(): Promise<User[] | undefined>;

@@ -1,15 +1,15 @@
-import { ICreateUserRepository } from "../../module/users/repositories/interfaces/ICreateUserRepository";
+import { IUserRepository } from "../../module/users/repositories/interfaces/ICreateUserRepository";
 import { UsersRepository } from "../../module/users/repositories/implementations/UsersRepository";
 import { container } from "tsyringe";
-import { ICreateProductRepository } from "../../module/users/repositories/interfaces/ICreateProductRepository";
+import { IProductRepository } from "../../module/users/repositories/interfaces/ICreateProductRepository";
 import { ProductsRepository } from "../../module/users/repositories/implementations/ProductsRepository";
 
-container.registerSingleton<ICreateUserRepository>(
+container.registerSingleton<IUserRepository>(
   "UserRepository",
   UsersRepository
 );
 
-container.registerSingleton<ICreateProductRepository>(
+container.registerSingleton<IProductRepository>(
   "ProductRepository",
   ProductsRepository
 );

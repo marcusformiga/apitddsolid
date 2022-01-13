@@ -1,8 +1,8 @@
 import { CreateUserDto } from "../../entities/dto/CreateUserDto";
 import { User } from "../../entities/User";
-import { ICreateUserRepository } from "../interfaces/ICreateUserRepository";
+import { IUserRepository } from "../interfaces/ICreateUserRepository";
 
-export class UsersRepositoryFake implements ICreateUserRepository {
+export class UsersRepositoryFake implements IUserRepository {
   private users: User[] = [];
   public async create({ name, email, password }: CreateUserDto): Promise<User> {
     const user = new User();

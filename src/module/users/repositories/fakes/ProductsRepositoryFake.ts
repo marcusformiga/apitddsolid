@@ -1,8 +1,8 @@
 import { CreateProductDto } from "../../entities/dto/CreateProductDto";
 import { Product } from "../../entities/Product";
-import { ICreateProductRepository } from "../interfaces/ICreateProductRepository";
+import { IProductRepository } from "../interfaces/ICreateProductRepository";
 
-export class ProductsRepositoryFake implements ICreateProductRepository {
+export class ProductsRepositoryFake implements IProductRepository {
   private products: Product[] = [];
   public async create({
     name,
@@ -17,5 +17,12 @@ export class ProductsRepositoryFake implements ICreateProductRepository {
     product.quantity = quantity;
     this.products.push(product);
     return product;
+  }
+  public async find(): Promise<Product[]> {
+    return this.products
+  }
+  public async findById(id: string): Promise<Product | undefined> {
+    const product = this.products.find(prod => prod.id === id)
+    return product
   }
 }
