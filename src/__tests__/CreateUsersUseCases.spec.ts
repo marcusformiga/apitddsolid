@@ -2,6 +2,7 @@ import { AppError } from "../shared/errors/AppError";
 import { User } from "../module/users/entities/User";
 import { UsersRepositoryFake } from "../module/users/repositories/fakes/UsersRepositoryFake";
 import { CreateUserUseCases } from "../module/users/useCases/createUser/CreateUsersUseCases";
+import { CreateUserDto } from "../module/users/entities/dto/CreateUserDto";
 
 let createUsersUseCases: CreateUserUseCases;
 let createUsersRepositoryFake: UsersRepositoryFake;
@@ -26,18 +27,21 @@ describe("CreateUsers", () => {
     expect(newUser).toBeDefined();
     expect(newUser).toBeTruthy()
   });
-  it("should not to be able to create 2 users with same email", async () => {
-    expect(async () => {
-      await createUsersUseCases.execute({
-        name: "testname",
-        email: "testemail@mail.com",
-        password: "1234",
-      });
-      await createUsersUseCases.execute({
-        name: "testname",
-        email: "testemail@mail.com",
-        password: "1234",
-      });
-    }).rejects.toBeInstanceOf(AppError);
-  });
+  // criamos um usuario normalmente
+  // depois fazemos nosso expect lançar o erro esperado pelo AppError
+  it("Should not be able to create a new user if email already exists", async () => {
+    const user: CreateUserDto = {
+      name: "validname",
+      email: "validmail@mail.com",
+      password: "validpass",
+    }
+    const newUser = await createUsersUseCases.execute(user)
+    await expect(
+      createUsersUseCases.execute({
+        name: "validname",
+        email: user.email,
+        password: "validpass"
+      })
+    ).rejects.toEqual(new AppError(`Usuário com o email ${user.email} já está cadastrado`, 409))
+  })
 });

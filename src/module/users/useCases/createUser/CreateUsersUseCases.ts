@@ -18,7 +18,7 @@ export class CreateUserUseCases {
   public async execute({ name, email, password }: IRequest): Promise<User> {
     const userExists = await this.createUserRepository.findByEmail(email);
     if (userExists) {
-      throw new AppError(`Usuário com o email ${email} já está cadastrado`);
+      throw new AppError(`Usuário com o email ${email} já está cadastrado`, 409);
     }
     const hashedPassword = await hash(password, 10);
     const user = await this.createUserRepository.create({

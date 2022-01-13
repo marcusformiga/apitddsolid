@@ -28,4 +28,9 @@ export class UsersRepositoryFake implements IUserRepository {
     const userExists = this.users.findIndex((user) => user.id === id);
     this.users.splice(userExists, 1);
   }
+  // public async update(id: string, data: string){
+  // const userIndex = this.users.findIndex(user => user.id === id)
+  // this.users[userIndex].att = data
+  // atualizacao fake
+  //}
 }
