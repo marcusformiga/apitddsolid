@@ -1,5 +1,5 @@
-import { Product } from "../module/users/entities/Product";
-import { ProductsRepositoryFake } from "../module/users/repositories/fakes/ProductsRepositoryFake";
+import { Product } from "../module/users/entities/Product"
+import { ProductsRepositoryFake } from "../module/users/repositories/fakes/ProductsRepositoryFake"
 import { ListProductsUseCases } from "../module/users/useCases/listProducts/ListAllProductsUseCase"
 let listProductRepositoryFake: ProductsRepositoryFake
 let listProductsUseCases: ListProductsUseCases
@@ -14,7 +14,6 @@ describe("ListAllProducts", () => {
       name: "validname",
       price: 1,
       quantity: 1,
-
     }
     const productCreated = await listProductRepositoryFake.create(prod)
     const list = await listProductsUseCases.execute()

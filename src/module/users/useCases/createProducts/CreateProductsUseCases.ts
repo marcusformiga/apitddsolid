@@ -1,14 +1,14 @@
-import { inject, injectable } from "tsyringe";
-import { CreateProductDto } from "../../entities/dto/CreateProductDto";
-import { Product } from "../../entities/Product";
-import { IProductRepository } from "../../repositories/interfaces/ICreateProductRepository";
+import { inject, injectable } from "tsyringe"
+import { CreateProductDto } from "../../entities/dto/CreateProductDto"
+import { Product } from "../../entities/Product"
+import { IProductRepository } from "../../repositories/interfaces/ICreateProductRepository"
 
 @injectable()
 export class CreateProductsUseCases {
   constructor(
     @inject("ProductRepository")
-    private productsRepository: IProductRepository
-  ) { }
+    private productsRepository: IProductRepository,
+  ) {}
   public async execute({
     name,
     description,
@@ -20,7 +20,7 @@ export class CreateProductsUseCases {
       description,
       price,
       quantity,
-    });
-    return product;
+    })
+    return product
   }
 }

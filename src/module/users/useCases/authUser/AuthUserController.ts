@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { AuthUserUseCases } from "./AuthUserUseCases";
+import { Request, Response } from "express"
+import { container } from "tsyringe"
+import { AuthUserUseCases } from "./AuthUserUseCases"
 
 export class AuthUserController {
   public async handle(request: Request, response: Response): Promise<Response> {

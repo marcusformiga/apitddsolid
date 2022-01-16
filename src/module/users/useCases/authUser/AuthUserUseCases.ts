@@ -1,7 +1,7 @@
-import { compare } from "bcrypt";
-import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
-import { IUserRepository } from "../../repositories/interfaces/ICreateUserRepository";
+import { compare } from "bcrypt"
+import { inject, injectable } from "tsyringe"
+import { AppError } from "../../../../shared/errors/AppError"
+import { IUserRepository } from "../../repositories/interfaces/ICreateUserRepository"
 import { sign } from "jsonwebtoken"
 export const authsecret = "hsauehsauehasuehs31w31"
 
@@ -13,14 +13,14 @@ interface IResponse {
   user: {
     name: string
     email: string
-  },
+  }
   token: string
 }
 @injectable()
 export class AuthUserUseCases {
   constructor(
-    @inject("UserRepository") private readonly userRepository: IUserRepository
-  ) { }
+    @inject("UserRepository") private readonly userRepository: IUserRepository,
+  ) {}
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     // verificar se o usuario existe
     const user = await this.userRepository.findByEmail(email)
@@ -36,14 +36,14 @@ export class AuthUserUseCases {
     // gerar o token
     const token = sign({}, authsecret, {
       subject: user.id,
-      expiresIn: "1d"
+      expiresIn: "1d",
     })
     return {
       user: {
         name: user.name,
-        email: user.email
+        email: user.email,
       },
-      token
+      token,
     }
   }
 }

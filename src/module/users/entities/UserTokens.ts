@@ -1,28 +1,28 @@
+import { CreateUserDto } from "./dto/CreateUserDto"
+import { randomUUID } from "crypto"
 import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm"
-import { CreateProductDto } from "./dto/CreateProductDto"
-import { randomUUID } from "crypto"
-@Entity("products")
-export class Product implements CreateProductDto {
+@Entity("users_tokens")
+export class UserTokens {
   @PrimaryColumn()
   id?: string
   @Column()
   name: string
+  @Generated("uuid")
   @Column()
-  price: number
+  token: string
   @Column()
-  description: string
+  user_id: string
   @Column()
-  quantity: number
+  email: string
   @CreateDateColumn()
   created_at?: Date
-  @UpdateDateColumn()
-  updated_at?: Date
   constructor() {
     if (!this.id) {
       this.id = randomUUID()

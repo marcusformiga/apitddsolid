@@ -1,32 +1,34 @@
-import { CreateUserDto } from "./dto/CreateUserDto";
-import { randomUUID } from "crypto";
+import { CreateUserDto } from "./dto/CreateUserDto"
+import { randomUUID } from "crypto"
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryColumn,
   UpdateDateColumn,
-} from "typeorm";
+} from "typeorm"
 @Entity("users")
 export class User implements CreateUserDto {
   @PrimaryColumn()
-  id?: string;
+  id?: string
   @Column()
-  name: string;
+  name: string
   @Column()
-  password: string;
+  password: string
   @Column()
-  is_admin: boolean;
+  is_admin: boolean
   @Column()
-  email: string;
+  avatar_url: string
+  @Column()
+  email: string
   @CreateDateColumn()
-  created_at?: Date;
+  created_at?: Date
   @UpdateDateColumn()
-  updated_at?: Date;
+  updated_at?: Date
   constructor() {
     if (!this.id) {
-      this.id = randomUUID();
-      this.is_admin = true;
+      this.id = randomUUID()
+      this.is_admin = true
     }
   }
 }
